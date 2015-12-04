@@ -1,8 +1,7 @@
 package com.lw.widget.slideitem;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.SparseBooleanArray;
+ import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,7 @@ public class SlideItemAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private RecyclerView mRecyclerView;
 
-    private SparseBooleanArray  mItemState = new SparseBooleanArray();
-    @Override
+     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_slide, parent, false);
         return new TextVH(view);
@@ -29,12 +27,7 @@ public class SlideItemAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextVH textVH = (TextVH) holder;
         textVH.textView.setText(text);
 
-        boolean expand = mItemState.get(position);
-        if(expand){
-            ItemSlideHelper.expand(holder, getHorizontalRange(holder));
-        }else{
-            ItemSlideHelper.collapse(holder);
-        }
+
     }
 
     @Override
@@ -50,17 +43,7 @@ public class SlideItemAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHol
         return 20;
     }
 
-    @Override
-    public void onCollapsed(RecyclerView.ViewHolder holder) {
-        mItemState.put(holder.getAdapterPosition(), false);
-        Log.d("slide", "onCollapsed");
-    }
 
-    @Override
-    public void onExpanded(RecyclerView.ViewHolder holder) {
-        mItemState.put(holder.getAdapterPosition(), true);
-        Log.d("slide", "onExpanded");
-    }
 
     @Override
     public int getHorizontalRange(RecyclerView.ViewHolder holder) {
@@ -86,10 +69,7 @@ public class SlideItemAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHol
         return mRecyclerView.findChildViewUnder(x, y);
     }
 
-    @Override
-    public boolean isEnable() {
-        return mRecyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE;
-    }
+
 }
 
 class TextVH extends RecyclerView.ViewHolder{
